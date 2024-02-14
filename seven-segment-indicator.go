@@ -16,8 +16,8 @@ const (
 	ModeCommonCathode
 )
 
-// CharacterSetter Интерфейс получения списка включаемых пинов, по руне
-type CharacterSetter interface {
+// Character Интерфейс получения списка включаемых пинов, по руне
+type Character interface {
 	Char(r rune) (aPin, bPin, cPin, dPin, ePin, fPin, gPin bool)
 }
 
@@ -29,7 +29,7 @@ type digit struct {
 
 // SevenSegmentsIndicator Семисегментный индикатор
 type SevenSegmentsIndicator struct {
-	characterSet CharacterSetter
+	characterSet Character
 	mode         Mode
 
 	aPin  machine.Pin
@@ -45,7 +45,7 @@ type SevenSegmentsIndicator struct {
 }
 
 // New Создание нового индикатора
-func New(characterSet CharacterSetter, mode Mode, aPin, bPin, cPin, dPin, ePin, fPin, gPin, dpPin machine.Pin, commonPins ...machine.Pin) *SevenSegmentsIndicator {
+func New(characterSet Character, mode Mode, aPin, bPin, cPin, dPin, ePin, fPin, gPin, dpPin machine.Pin, commonPins ...machine.Pin) *SevenSegmentsIndicator {
 	s := &SevenSegmentsIndicator{
 		characterSet: characterSet,
 		mode:         mode,
