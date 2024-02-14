@@ -21,7 +21,7 @@ type CharacterSetter interface {
 	Char(r rune) (aPin, bPin, cPin, dPin, ePin, fPin, gPin bool)
 }
 
-type segment struct {
+type digit struct {
 	pin  machine.Pin
 	char rune
 	dot  bool
@@ -41,7 +41,7 @@ type SevenSegmentsIndicator struct {
 	gPin  machine.Pin
 	dpPin machine.Pin
 
-	digits []segment
+	digits []digit
 }
 
 // New Создание нового индикатора
@@ -59,11 +59,11 @@ func New(characterSet CharacterSetter, mode Mode, aPin, bPin, cPin, dPin, ePin, 
 		gPin:  gPin,
 		dpPin: dpPin,
 
-		digits: make([]segment, len(commonPins)),
+		digits: make([]digit, len(commonPins)),
 	}
 
 	for i, pin := range commonPins {
-		s.digits[i] = segment{
+		s.digits[i] = digit{
 			pin:  pin,
 			char: -1,
 			dot:  false,
